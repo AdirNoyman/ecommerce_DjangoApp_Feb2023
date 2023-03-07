@@ -19,6 +19,9 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    # Create Foreign key to link the product to category
+    category = models.ForeignKey(
+        Category, related_name='product', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=250)
     brand = models.CharField(max_length=250, default='un-branded')
     # 'TextField' - enables entering more text. and we want to set to optional so that wy we have set it to 'blank=True'
@@ -26,7 +29,7 @@ class Product(models.Model):
     # The product URL enpoint
     slug = models.SlugField(max_length=250)
     price = models.DecimalField(max_digits=4, decimal_places=2)
-    image = models.ImageField(upload_to='images/',blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     # set how the plural of Category plural name, explictly, for the admin
 
     class Meta:
